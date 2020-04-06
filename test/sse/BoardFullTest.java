@@ -4,14 +4,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class BoardTest {
+/**
+ * This test tests the functions when the board is full.
+ *
+ * All test cases are based on a full board.
+ */
+public class BoardFullTest {
     Board board;
 
     @Before
     public void setUp() throws Exception {
         board=new Board();
+        for(int i=0;i<42;i++){
+            board.setChess(i%7,i%2);
+        }
     }
 
     @After
@@ -21,7 +29,7 @@ public class BoardTest {
 
     @Test
     public void setChess() {
-        assertEquals(board.setChess(11,1),false);
+        assertEquals(board.setChess(0,1),false);
     }
 
     @Test
@@ -30,5 +38,6 @@ public class BoardTest {
 
     @Test
     public void isFull() {
+        assertEquals(board.isFull(),true);
     }
 }
