@@ -25,9 +25,21 @@ public class BoardBasicTest {
     }
 
     @Test
-    public void setChess() {
-        assertEquals(board.setChess(11,1),false);
+    public void setChessBasic() {
+        assertEquals(board.setChess(1,1),true);
     }
+
+    @Test
+    public void setChessBVT1(){assertEquals(board.setChess(-1,1),false);}
+
+    @Test
+    public void setChessBVT2(){assertEquals(board.setChess(7 ,1),false);}
+
+    @Test
+    public void setChessBVT3(){assertEquals(board.setChess(1,0),false);}
+
+    @Test
+    public void setChessBVT4(){assertEquals(board.setChess(1,3),false);}
 
     @Test
     public void getGameBoard() {

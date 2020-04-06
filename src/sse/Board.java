@@ -49,6 +49,7 @@ public class Board {
         if(columnNumber<0||columnNumber>=colSize){//The column number is invalid.
             return false;
         }
+        if((chessNumber!=1)&&(chessNumber!=2)) return false;//The chess number is invalid.
         int[] column=gameBoard[columnNumber];
         if(column[colSize-1]>0) return false;//The column is full so the operation failed.
         for(int index=0;index<colSize;index++){//Drop the chess to the bottommost row.
