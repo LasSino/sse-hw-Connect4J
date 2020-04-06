@@ -46,15 +46,17 @@ public class Board {
      * @return If the chess is set successfully, return true. Otherwise returns false.
      */
     public boolean setChess(int columnNumber,int chessNumber){
-        if(columnNumber<0||columnNumber>=colSize){//The column number is invalid.
+        if(columnNumber<0||columnNumber>=rowSize){//The column number is invalid.
             return false;
         }
         if((chessNumber!=1)&&(chessNumber!=2)) return false;//The chess number is invalid.
         int[] column=gameBoard[columnNumber];
         if(column[colSize-1]>0) return false;//The column is full so the operation failed.
         for(int index=0;index<colSize;index++){//Drop the chess to the bottommost row.
-            if(column[index]==0) column[index]=chessNumber;
-            break;
+            if(column[index]==0) {
+                column[index]=chessNumber;
+                break;
+            }
         }
         return true; //The chess is successfully set.
     }

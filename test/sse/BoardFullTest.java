@@ -4,7 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.lang.reflect.Field;
+
+import static org.junit.Assert.*;
 
 /**
  * This test tests the functions when the board is full.
@@ -18,7 +20,7 @@ public class BoardFullTest {
     public void setUp() throws Exception {
         board=new Board();
         for(int i=0;i<42;i++){
-            board.setChess(i%7,i%2);
+            board.setChess(i%7,(i%2)+1);
         }
     }
 
@@ -28,16 +30,25 @@ public class BoardFullTest {
     }
 
     @Test
-    public void setChess() {
-        assertEquals(board.setChess(0,1),false);
+    public void setChessWhenFull() {
+        int[][] boardArrayBefore=board.getGameBoard();
+        assertFalse(board.setChess(1,1));
+        assertArrayEquals(boardArrayBefore,board.getGameBoard());
     }
 
     @Test
-    public void getGameBoard() {
+    public void getGameBoard() throws NoSuchFieldException, IllegalAccessException {
+        Field boardArrayField =board.getClass().getDeclaredField("gameBoard");
+        boardArrayField.setAccessible(true);
+        int[][] boardStatus=(int[][]) boardArrayField.get(board);
+        int[][] returnedStatus=board.getGameBoard();
+        assertArrayEquals(boardStatus,returnedStatus);
+        //Hashcode differs for different memory location. So this judges deep-copy and shallow-copy.
+        assertNotEquals(boardStatus.hashCode(),returnedStatus.hashCode());
     }
 
     @Test
     public void isFull() {
-        assertEquals(board.isFull(),true);
+        assertTrue(board.isFull());
     }
 }
