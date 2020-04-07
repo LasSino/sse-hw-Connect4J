@@ -1,18 +1,28 @@
 package sse;
 
 
+/**
+ * The controller class.
+ * This class manages the control of the game board.
+ * @author LTW
+ */
 public class GameController {
     private Board board;
     private int currentPlayer;
+    private int lastColumnIndex;
 
     public GameController() {
         board=new Board();
         currentPlayer=1;
+        lastColumnIndex=-1;
     }
 
     public boolean setChess(int column){
-        boolean res=board.setChess(column,currentPlayer);
-        currentPlayer=((currentPlayer==1)?2:1);
+        boolean res=board.setChess(column, getCurrentPlayer());
+        if(res){
+            currentPlayer=((getCurrentPlayer() ==1)?2:1);
+            lastColumnIndex=column;
+        }
         displayGameboard();
         return res;
     }
@@ -37,10 +47,9 @@ public class GameController {
 
     /**
      * Check whether last move leads to win.
-     * @param lastColumnIndex the column number of last move
      * @return True if last move leads to win, else false.
      */
-    public boolean checkWinning(int lastColumnIndex){
+    public boolean checkWinning(){
         int[][] boardStatus=board.getGameBoard();
         int[] lastColumn=boardStatus[lastColumnIndex];
         int lastRowIndex;
@@ -97,4 +106,21 @@ public class GameController {
         return false;
     }
 
+    /**
+     * This function checks whether the game has finished
+     * @return the finish status.
+     */
+    public boolean isFinished(){
+        if(checkWinning())return true;
+        if(board.isFull()) return true;
+        return false;
+    }
+
+    /**
+     * Getter function that decides the current player.
+     * @return current player.
+     */
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
 }

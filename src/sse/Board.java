@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Class {@code Board} is the model for a Connect 4 game board.
  * This class manages the storage of the game board status, also provides fucntion to place the chesses.
+ * @author LTW
  */
 public class Board {
     /**
@@ -18,13 +19,13 @@ public class Board {
      * To mock the top and bottom in the actual game,
      * we make it a conservation that the smaller index represents the bottom.
      */
-    private int[][] gameBoard;
+    protected int[][] gameBoard;
 
-    private static int rowSize=7; //There are 7 columns in a row.
-    private static int colSize=6; //There are 6 rows in a column.
-    private static int placeHolder=0;
-    private static int player1Chess=1;
-    private static int player2Chess=2;
+    public static final int rowSize=7; //There are 7 columns in a row.
+    public static final int colSize=6; //There are 6 rows in a column.
+    private static final int placeHolder=0;
+    private static final int player1Chess=1;
+    private static final int player2Chess=2;
 
     /**
      * The constructor for the game board.
