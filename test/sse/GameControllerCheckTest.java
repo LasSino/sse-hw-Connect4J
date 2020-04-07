@@ -43,6 +43,72 @@ public class GameControllerCheckTest {
     }
 
     @Test
-    public void isFinished() {
+    public void checkWinningPCT2() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {0,0,0,0,0,0}, {1,1,1,0,0,0}, {2,2,2,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(1);
+        assertTrue(ctl.checkWinning());
+    }
+
+    @Test
+    public void checkWinningPCT3() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {0,0,0,0,0,0}, {1,2,2,0,0,0}, {1,2,1,0,0,0}, {1,1,2,0,0,0}, {1,2,2,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(1);
+        assertTrue(ctl.checkWinning());
+    }
+
+    @Test
+    public void checkWinningPCT4() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {0,0,0,0,0,0}, {2,1,0,0,0,0}, {1,2,1,0,0,0}, {1,2,2,1,0,0}, {2,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(0);
+        assertTrue(ctl.checkWinning());
+    }
+
+    @Test
+    public void checkWinningPCT5() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {0,0,0,0,0,0}, {1,2,0,0,0,0}, {2,1,0,0,0,0}, {1,2,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(0);
+        assertFalse(ctl.checkWinning());
+    }
+
+    @Test
+    public void isFinishedCT1() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {0,0,0,0,0,0}, {2,1,0,0,0,0}, {1,2,1,0,0,0}, {1,2,2,1,0,0}, {2,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(0);
+        assertTrue(ctl.isFinished());
+    }
+
+    @Test
+    public void isFinishedCT2() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {1,2,1,2,1,2}, {2,1,2,1,2,1}, {2,1,2,1,2,1}, {1,2,1,2,1,2},  {1,2,1,2,1,2}, {2,1,2,1,2,1}, {2,1,2,1,2,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(6);
+        assertTrue(ctl.isFinished());
+    }
+
+    @Test
+    public void isFinishedCT3() throws IllegalAccessException {
+        int[][] boardStatus=new int[][]{
+                {0,0,0,0,0,0}, {2,1,0,0,0,0}, {1,2,1,0,0,0}, {1,2,2,1,0,0}, {2,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}
+        };
+        boardField.set(ctl,new BoardStub(boardStatus));
+        ctl.setChess(3);
+        assertFalse(ctl.isFinished());
     }
 }
