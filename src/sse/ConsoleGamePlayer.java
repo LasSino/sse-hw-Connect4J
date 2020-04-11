@@ -28,6 +28,10 @@ public class ConsoleGamePlayer implements GamePlayer {
     @Override
     public int getNextChessSetPosition(ChessTypeEnum[][] boardStatus) {
         System.out.print(getPlayerName()+", please input next column index you want to set chess: ");
+        while(sc.hasNext()&&!sc.hasNextInt()){
+            sc.next();
+            System.out.print("Please input a number:");
+        }
         return sc.nextInt();
     }
 }
